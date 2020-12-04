@@ -1,36 +1,29 @@
-/*
- Controlling a servo position using a potentiometer (variable resistor)
- by Michal Rinott <http://people.interaction-ivrea.it/m.rinott>
 
- modified on 8 Nov 2013
- by Scott Fitzgerald
- http://www.arduino.cc/en/Tutorial/Knob
-*/
 
 #include <Servo.h>
 
-int thumb = 0;         // the sensor value
-int sensorMin1 = 1023;        // minimum sensor value
-int sensorMax1 = 0;
+int thumb = 0;            // the sensor value
+int sensorMin1 = 1023;    // maximum sensor value    
+int sensorMax1 = 0;       // minimum sensor value
 
-int index = 0;         // the sensor value
-int sensorMin2 = 1023;        // minimum sensor value
-int sensorMax2 = 0;
+int index = 0;            // the sensor value
+int sensorMin2 = 1023;    // maximum sensor value
+int sensorMax2 = 0;       // minimum sensor value
 
-int middle = 0;         // the sensor value
-int sensorMin3 = 1023;        // minimum sensor value
-int sensorMax3 = 0;
+int middle = 0;           // the sensor value
+int sensorMin3 = 1023;    // maximum sensor value
+int sensorMax3 = 0;       // minimum sensor value
 
-int pinkie = 0;         // the sensor value
-int sensorMin4 = 1023;        // minimum sensor value
-int sensorMax4 = 0;
+int pinkie = 0;           // the sensor value
+int sensorMin4 = 1023;    // maximum sensor value
+int sensorMax4 = 0;       // minimum sensor value
 
-Servo myservo;  // create servo object to control a servo
+Servo myservo1;   // create servo object to control a servo
 Servo myservo2;  // create servo object to control a servo
 Servo myservo3;  // create servo object to control a servo
 Servo myservo4;  // create servo object to control a servo
 
-int potpin = 0;  // analog pin used to connect the potentiometer
+int potpin = 0;   // analog pin used to connect the potentiometer
 int potpin2 = 1;  // analog pin used to connect the potentiometer
 int potpin3 = 2;  // analog pin used to connect the potentiometer
 int potpin4 = 3;  // analog pin used to connect the potentiometer
@@ -147,7 +140,7 @@ void setup() {
   delay (2000);
 
 
-  myservo.attach(5);  // attaches the servo on pin 9 to the servo object
+  myservo1.attach(5);  // attaches the servo on pin 9 to the servo object
   myservo2.attach(9);  // attaches the servo on pin 9 to the servo object
   myservo3.attach(6);  // attaches the servo on pin 9 to the servo object
   myservo4.attach(10);  // attaches the servo on pin 9 to the servo object
@@ -249,7 +242,7 @@ void loop() {
   val3 = map(val3average, sensorMin3, sensorMax3, 0, 180);     // scale it to use it with the servo (value between 0 and 180)
   val3 = constrain(val3, 0, 180);
 
-//Value 4 ---
+// Value 4 ---
 
   for (int val4thisReading = 0; val4thisReading < val4numReadings; val4thisReading++) {
     val4readings[val4thisReading] = 0;
@@ -282,6 +275,8 @@ void loop() {
   val4 = constrain(val4, 0, 180);
 
 
+// Print out values
+
   Serial.print("thumb : ");
   Serial.print(val2);
   Serial.print("   ");
@@ -294,7 +289,7 @@ void loop() {
   Serial.print("Pinkie : ");
   Serial.println(val4);
 
-    myservo.write(val1);                  
+    myservo1.write(val1);                  
     myservo2.write(val2); 
     myservo3.write(val3); 
     myservo4.write(val4);
